@@ -1,13 +1,24 @@
-const connection = require("./config/myconnection");
 const inquirer = require("inquirer");
-const table = require("easy-table");
+const Table = require("easy-table");
+const mysql = require("mysql2"); 
+
+
+const connection = mysql.createConnection(
+    {
+        host: "localhost",
+        user: "root",
+        password:"cool",
+        database:"employee_tracker"
+
+    }
+)
 
 const app = async () => {
-  connection.connect(async (error) => {
-    if (error) {
+  connection.connect(async (err) => {
+    if (err) {
       console.log("An error exist!");
-      console.log(error.message);
-    }
+      console.log(err.message);
+    };
     console.log("connected to database");
     await main();
   });
@@ -55,12 +66,12 @@ const main = async () => {
 };
 
 const viewAllDepartments = async () => {
-  connection.query("SELECT * FROM department", async (error, response) => {
-    if (error) {
+  connection.query("SELECT * FROM department", async (err, res) => {
+    if (err) {
       console.log("An Error Exists!");
-      console.log(error.message);
+      console.log(err.message);
     }
-    console.log(table.print(response));
+    console.log(Table.print(res));
     await main();
   });
 };
@@ -68,14 +79,16 @@ const viewAllDepartments = async () => {
 const viewAllRoles = async () => {
   connection.query(
     "SELECT employee_tracker.roles.id, employee_tracker.roles.job_title, employee_tracker.roles.salary, employee_tracker.department.name AS department FROM employee_tracker.roles JOIN employee_tracker.department ON employee_tracker.roles.department_id = employee_tracker.department.id",
-    async (error, response) => {
-      if (error) {
+    async (err, res) => {
+      if (err) {
         console.log("An Error Exists!");
-        console.log(error.message);
+        console.log(err.message);
       }
-      console.log(table.print(response));
+      console.log(res);
+      console.log(Table.print(res));
       await main();
     }
   );
 };
 
+app();
