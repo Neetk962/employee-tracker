@@ -1,16 +1,17 @@
 # employee-tracker
-Is an application that takes in user input to generate a logo and save it as an SVG fileLinks to an external site.The application prompts the user to select a color and shape, provide text for the logo, and save the generated SVG to a SVG file. 
+Is an application that takes in user input to generate and manage a company's employee database, using Node.js, Inquirer, and MySQL.
 
 
 ## Usage:
 
+open in terminal, enter node server.js, follow the prompted questions. 
 
 Screencastify Link:
 https://drive.google.com/file/d/1Pims6bJksUp-rF7YP9t3YlyhbSLtYx1J/view
 
 ## Credits:
-used: index.js, package.json,SVG,JS, ran npm install. 
-TA Charlie Puente 
+used:  Inquirer package, MySQL2 package, Node.js
+ 
 
 
 ## License 
